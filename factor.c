@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 		mpz_sqrt(sqrt_n, n);
 		while (num)
 		{
-			if (num > 11)
+			if (num > 100)
 			{
 				mpz_mod(mod_n2, n, sqrt_n);
 				if (mpz_cmp_ui(mod_n2, 0) == 0)
