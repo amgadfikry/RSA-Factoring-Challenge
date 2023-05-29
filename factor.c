@@ -39,12 +39,16 @@ int main(int argc, char *argv[])
 		mpz_sqrt(sqrt_n, n);
 		while (num)
 		{
-			mpz_mod(mod_n2, n, sqrt_n);
-			if (mpz_cmp_ui(mod_n2, 0) == 0)
+			if (num > 11)
 			{
-				mpz_div(div_n, n, sqrt_n);
-				gmp_printf("%Zd=%Zd*%Zd\n", n, div_n, sqrt_n);
-				break;
+				mpz_mod(mod_n2, n, sqrt_n);
+				if (mpz_cmp_ui(mod_n2, 0) == 0)
+				{
+					mpz_div(div_n, n, sqrt_n);
+					gmp_printf("%Zd=%Zd*%Zd\n", n, div_n, sqrt_n);
+					break;
+				}
+				mpz_sub_ui(sqrt_n, sqrt_n, 1);
 			}
 			if ((res = mpz_mod_ui(mod_n, n, num)) == 0)
 			{
@@ -52,7 +56,6 @@ int main(int argc, char *argv[])
 				gmp_printf("%Zd=%Zd*%d\n", n, div_n, num);
 				break;
 			}
-			mpz_sub_ui(sqrt_n, sqrt_n, 1);
 			num++;
 		}
 		mpz_clear(n);
