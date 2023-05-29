@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 	size_t line_n = 0;
 	char *line = NULL;
 	unsigned int num = 2, res;
-	mpz_t n, div_n, mod_n, sqrt_n;
+	mpz_t n, div_n, mod_n;
 	(void) argc;
 
 	file = fopen(argv[1], "r");
@@ -33,16 +33,8 @@ int main(int argc, char *argv[])
 		mpz_init(n);
 		mpz_init(div_n);
 		mpz_init(mod_n);
-		mpz_init(sqrt_n);
 		mpz_set_str(n, line, 10);
-		mpz_sqrt(sqrt_n, n);
-		mpz_mod(mod_n, n, sqrt_n);
-		if (mpz_cmp_ui(mod_n, 0) == 0)
-		{
-			gmp_printf("%Zd=%Zd*%Zd\n", n, sqrt_n, sqrt_n);		
-			num = 0;
-		}
-		while (num != 0)
+		while (num)
 		{
 			if ((res = mpz_mod_ui(mod_n, n, num)) == 0)
 			{
@@ -55,7 +47,6 @@ int main(int argc, char *argv[])
 		mpz_clear(n);
 		mpz_clear(div_n);
 		mpz_clear(mod_n);
-		mpz_clear(sqrt_n);
 		num = 2;
 	}
 	fclose(file);
