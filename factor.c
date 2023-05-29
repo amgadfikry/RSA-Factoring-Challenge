@@ -20,7 +20,9 @@ int main(int argc, char *argv[])
 	char *line = NULL;
 	unsigned int num = 2, res;
 	mpz_t n, div_n, mod_n, sqrt_n, mod_n2;
-	(void) argc;
+	
+	if (argc != 2)
+		return (1);
 
 	file = fopen(argv[1], "r");
 	if (file == NULL)
